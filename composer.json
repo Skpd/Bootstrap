@@ -1,6 +1,9 @@
 {
     "name": "Skpd/Bootstrap",
     "description": "Bootstrap 3 integration for ZF2",
+    "type": "library",
+    "keywords": ["Bootstrap","Bootstrap 3","zf2","zendframework2","Zend Framework 2","Twitter Bootstrap"],
+    "homepage": "https://github.com/Skpd/Bootstrap",
     "minimum-stability": "dev",
     "authors": [
         {
@@ -24,5 +27,10 @@
     },
     "suggest": {
         "twbs/bootstrap": "Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development."
+    },
+    "autoload": {
+        "psr-0": {
+            "Skpd\Bootstrap": "src/Bootstrap"
+        }
     }
 }
