@@ -1,5 +1,5 @@
 {
-    "name": "Skpd/Bootstrap",
+    "name": "skpd/bootstrap",
     "description": "Bootstrap 3 integration for ZF2",
     "type": "library",
     "keywords": ["Bootstrap","Bootstrap 3","zf2","zendframework2","Zend Framework 2","Twitter Bootstrap"],
