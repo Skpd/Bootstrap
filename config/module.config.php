@@ -5,8 +5,8 @@ namespace Skpd\Bootstrap;
 return [
     'view_helpers' => [
         'invokables' => [
-            'form' => 'Skpd\Bootstrap3\Form\View\Helper\Form',
-            'formRow' => 'Skpd\Bootstrap3\Form\View\Helper\FormRow',
+            'form' => 'Skpd\Bootstrap\Form\View\Helper\Form',
+            'formRow' => 'Skpd\Bootstrap\Form\View\Helper\FormRow',
             'formColor' => 'Skpd\Bootstrap\Form\View\Helper\FormColor',
             'formDateTime' => 'Skpd\Bootstrap\Form\View\Helper\FormDateTime',
             'formEmail' => 'Skpd\Bootstrap\Form\View\Helper\FormEmail',
