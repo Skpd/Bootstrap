@@ -1,0 +1,28 @@
+{
+    "name": "Skpd/Bootstrap",
+    "description": "Bootstrap 3 integration for ZF2",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Dmitry Shabanov",
+            "email": "dm.skpd@gmail.com"
+        }
+    ],
+    "repositories":[
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "twbs/bootstrap",
+                "source": {"url": "https://github.com/twbs/bootstrap.git","type": "git","reference": "master"}
+            }
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.2.*"
+    },
+    "suggest": {
+        "twbs/bootstrap": "Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development."
+    }
+}
