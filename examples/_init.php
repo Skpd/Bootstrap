@@ -32,6 +32,7 @@ $view->getHelperPluginManager()->setInvokableClass('formElementErrors', 'Zend\Fo
 $view->getHelperPluginManager()->setInvokableClass('formCheckbox', 'Zend\Form\View\Helper\FormCheckbox');
 $view->getHelperPluginManager()->setInvokableClass('formSubmit', 'Zend\Form\View\Helper\FormSubmit');
 $view->getHelperPluginManager()->setInvokableClass('formButton', 'Zend\Form\View\Helper\FormButton');
+$view->getHelperPluginManager()->setInvokableClass('formCollection', 'Zend\Form\View\Helper\FormCollection');
 
 $view->getHelperPluginManager()->setInvokableClass('headScript', 'Zend\View\Helper\HeadScript');
 $view->getHelperPluginManager()->setInvokableClass('headLink', 'Zend\View\Helper\HeadLink');
