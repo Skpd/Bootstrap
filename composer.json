@@ -30,7 +30,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Skpd\\Bootstrap": "src/Bootstrap"
-        }
+            "Skpd\\Bootstrap\\": "src/"
+        },
+        "classmap" : ["Module.php"]
     }
 }

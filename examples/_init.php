@@ -2,10 +2,10 @@
 
 use Zend\Loader\StandardAutoloader;
 
-require_once '../vendor/zendframework/zendframework/library/Zend/Loader/StandardAutoloader.php';
+require_once '../../../zendframework/zendframework/library/Zend/Loader/StandardAutoloader.php';
 
 $loader = new StandardAutoloader(array('autoregister_zf' => true));
-$loader->registerNamespace('Skpd\Bootstrap', '../src/Bootstrap');
+$loader->registerNamespace('Skpd\\Bootstrap\\', '../src');
 
 $loader->register();
 
