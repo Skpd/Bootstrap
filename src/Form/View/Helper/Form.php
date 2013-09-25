@@ -58,7 +58,7 @@ class Form extends \Zend\Form\View\Helper\Form
                 $attributes['class'] = $attributes['class'] . ' ';
             }
 
-            $attributes['class'] = 'form-' . $this->type;
+            $attributes['class'] .= 'form-' . $this->type;
         }
 
         $tag = sprintf('<form %s>', $this->createAttributesString($attributes));
