@@ -7,6 +7,7 @@ return [
         'invokables' => [
             'form' => 'Skpd\Bootstrap\Form\View\Helper\Form',
             'formRow' => 'Skpd\Bootstrap\Form\View\Helper\FormRow',
+            'formCollection' => 'Skpd\Bootstrap\Form\View\Helper\FormCollection',
             'formColor' => 'Skpd\Bootstrap\Form\View\Helper\FormColor',
             'formDateTime' => 'Skpd\Bootstrap\Form\View\Helper\FormDateTime',
             'formEmail' => 'Skpd\Bootstrap\Form\View\Helper\FormEmail',
