@@ -3,7 +3,10 @@
 namespace Skpd\Bootstrap\Form\View\Helper;
 
 use Zend\Form\Element\Button;
+use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\File;
+use Zend\Form\Element\MultiCheckbox;
+use Zend\Form\Element\Radio;
 use Zend\Form\Element\Submit;
 use Zend\Form\ElementInterface;
 
@@ -67,66 +70,53 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
             $label = $escapeHtmlHelper($label);
         }
 
-        switch ($element->getAttribute('type')) {
-            case 'multi_checkbox':
-            case 'radio':
-                $rowClass = 'form-group';
-                $markup = sprintf(
-                    '<fieldset><legend>%s</legend>%s</fieldset>',
-                    $label,
-                    $elementHelper->render($element)
-                );
-                break;
+        if ($element instanceof MultiCheckbox || $element instanceof Radio) {
+            $rowClass = 'form-group';
+            $markup = sprintf(
+                '<fieldset><legend>%s</legend>%s</fieldset>',
+                $label,
+                $elementHelper->render($element)
+            );
+        } else if ($element instanceof Checkbox) {
+            $rowClass = 'checkbox';
+            $markup = $labelHelper->openTag() . $elementHelper->render($element) . $label . $labelHelper->closeTag();
+        } else if ($element instanceof Submit) {
+            $rowClass = 'form-group';
+            $elementClass = $element->getAttribute('class');
+            if (!empty($elementClass)) {
+                $elementClass .= ' ';
+            }
+            $elementClass .= 'btn' . ($element->getOption('type') ? ' btn-' . $element->getOption('type') : '');
+            $element->setAttribute('class', $elementClass);
 
-            case 'checkbox':
-                $rowClass = 'checkbox';
-                $markup = $labelHelper->openTag() . $elementHelper->render($element) . $label . $labelHelper->closeTag();
-                break;
+            $element->setValue($label);
+            $markup = $elementHelper->render($element);
+        } else if ($element instanceof Button) {
+            $rowClass = 'form-group';
+            $elementClass = $element->getAttribute('class');
+            if (!empty($elementClass)) {
+                $elementClass .= ' ';
+            }
+            $elementClass .= 'btn' . ($element->getOption('type') ? ' btn-' . $element->getOption('type') : '');
+            $element->setAttribute('class', $elementClass);
 
-            case $element instanceof Submit:
-                $rowClass = 'form-group';
-                $elementClass = $element->getAttribute('class');
-                if (!empty($elementClass)) {
-                    $elementClass .= ' ';
-                }
-                $elementClass .= 'btn' . ($element->getOption('type') ? ' btn-' . $element->getOption('type') : '');
-                $element->setAttribute('class', $elementClass);
+            $markup = $elementHelper->render($element);
+        } else if ($element instanceof File) {
+            $rowClass = 'form-group';
+            $label = $labelHelper->openTag($this->getLabelAttributesByElement($element)) . $label . $labelHelper->closeTag();
+            $markup = $label . $elementHelper->render($element);
+        } else {
+            $rowClass = 'form-group';
 
-                $element->setValue($label);
-                $markup = $elementHelper->render($element);
-                break;
+            $elementClass = $element->getAttribute('class');
+            if (!empty($elementClass)) {
+                $elementClass .= ' ';
+            }
+            $elementClass .= 'form-control';
+            $element->setAttribute('class', $elementClass);
 
-            case $element instanceof Button:
-                $rowClass = 'form-group';
-                $elementClass = $element->getAttribute('class');
-                if (!empty($elementClass)) {
-                    $elementClass .= ' ';
-                }
-                $elementClass .= 'btn' . ($element->getOption('type') ? ' btn-' . $element->getOption('type') : '');
-                $element->setAttribute('class', $elementClass);
-
-                $markup = $elementHelper->render($element);
-                break;
-
-            case $element instanceof File:
-                $rowClass = 'form-group';
-                $label = $labelHelper->openTag($this->getLabelAttributesByElement($element)) . $label . $labelHelper->closeTag();
-                $markup = $label . $elementHelper->render($element);
-                break;
-
-            default:
-                $rowClass = 'form-group';
-
-                $elementClass = $element->getAttribute('class');
-                if (!empty($elementClass)) {
-                    $elementClass .= ' ';
-                }
-                $elementClass .= 'form-control';
-                $element->setAttribute('class', $elementClass);
-
-                $label = $labelHelper->openTag($this->getLabelAttributesByElement($element)) . $label . $labelHelper->closeTag();
-                $markup = $label . $elementHelper->render($element);
-                break;
+            $label = $labelHelper->openTag($this->getLabelAttributesByElement($element)) . $label . $labelHelper->closeTag();
+            $markup = $label . $elementHelper->render($element);
         }
 
         if ($this->renderErrors) {
@@ -165,6 +155,8 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
 
         if (isset($labelAttributes['class'])) {
             $labelAttributes['class'] .= ' ';
+        } else {
+            $labelAttributes['class'] = '';
         }
 
         if (!isset($labelAttributes['size'])) {
