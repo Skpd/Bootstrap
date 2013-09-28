@@ -3,6 +3,7 @@
 namespace Skpd\Bootstrap\Form\View\Helper;
 
 use Zend\Form\Element\Collection as CollectionElement;
+use Zend\Form\Element\Collection;
 use Zend\Form\ElementInterface;
 use Zend\Form\Fieldset;
 use Zend\Form\FieldsetInterface;
@@ -19,6 +20,16 @@ class FormCollection extends \Zend\Form\View\Helper\FormCollection
         var currentId = parent.querySelectorAll('fieldset').length;
         template.insertAdjacentHTML('beforebegin', template.dataset.template.replace(/__placeholder__/g, currentId));
     ";
+
+    public function __invoke(ElementInterface $element = null, $allowRemove = false)
+    {
+        if (!$element) {
+            return $this;
+        }
+
+        return $this->render($element, $allowRemove);
+    }
+
 
     public function render(ElementInterface $element, $allowRemove = false)
     {
@@ -38,7 +49,11 @@ class FormCollection extends \Zend\Form\View\Helper\FormCollection
 
         foreach ($element->getIterator() as $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
-                $markup .= $fieldsetHelper($elementOrFieldset);
+                if ($fieldsetHelper instanceof $this && $element instanceof Collection) {
+                    $markup .= $fieldsetHelper($elementOrFieldset, $element->allowRemove());
+                } else {
+                    $markup .= $fieldsetHelper($elementOrFieldset);
+                }
             } elseif ($elementOrFieldset instanceof ElementInterface) {
                 $markup .= $elementHelper($elementOrFieldset);
             }
@@ -53,7 +68,7 @@ class FormCollection extends \Zend\Form\View\Helper\FormCollection
                     . str_replace('__placeholder__', $element->getTemplatePlaceholder(), $this->addButtonEvent)
                     . '" type="button" class="close"><i class="glyphicon glyphicon-plus"></i></button>';
             }
-        } else if ($element instanceof Fieldset) {
+        } elseif ($element instanceof Fieldset && $allowRemove) {
             $removeButton = sprintf($this->removeButtonMarkup, $this->removeButtonEvent, $this->removeButtonContent);
         }
 

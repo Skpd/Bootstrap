@@ -69,14 +69,49 @@ $form->add([
         ]
     ]
 ]);
+$form->add([
+    'name' => 'fieldset',
+    'type' => 'Zend\Form\Fieldset',
+    'options' => [
+        'label' => 'Another Fieldset',
+        'size' => 10
+    ],
+    'elements' => [
+        [
+            'spec' => [
+                'name' => 'datetime',
+                'type' => 'text',
+                'options' => ['label' => 'Foo', 'size' => 4],
+            ]
+        ],
+        [
+            'spec' => [
+                'name' => 'more',
+                'type' => 'file',
+                'options' => ['label' => 'Bar', 'size' => 6],
+            ]
+        ],
+        [
+            'spec' => [
+                'name' => 'fields',
+                'type' => 'color',
+                'options' => ['label' => 'Baz', 'size' => 2],
+            ]
+        ],
+    ]
+]);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <? $view->headLink()->appendStylesheet('css/bootstrap.css') ?>
+    <link rel="stylesheet" href="css/bootstrap.css" media="screen"/>
 
-    <?= $view->headLink() ?>
+    <style type="text/css">
+        fieldset fieldset {
+            margin-left: 2em;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -88,7 +123,7 @@ $form->add([
         </div>
 
         <div class="panel-body">
-            <?= $view->form()->setType('horizontal')->render($form->setAttribute('class', 'col-lg-6')) ?>
+            <?= $view->form()->setType('horizontal')->render($form->setAttribute('class', 'col-lg-offset-2 col-lg-8')) ?>
         </div>
     </div>
 </div>
