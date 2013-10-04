@@ -56,6 +56,8 @@ class Form extends \Zend\Form\View\Helper\Form
         if (!empty($this->type) && !empty($this->validTypes[$this->type])) {
             if (isset($attributes['class'])) {
                 $attributes['class'] = $attributes['class'] . ' ';
+            } else {
+                $attributes['class'] = '';
             }
 
             $attributes['class'] .= 'form-' . $this->type;
