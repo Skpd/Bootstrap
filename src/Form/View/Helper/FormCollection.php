@@ -17,7 +17,10 @@ class FormCollection extends \Zend\Form\View\Helper\FormCollection
     protected $addButtonEvent = "
         var parent = this.parentElement.tagName == 'fieldset' ? this.parentElement : this.parentElement.parentElement;
         var template = parent.lastChild;
-        var currentId = parent.querySelectorAll('fieldset').length;
+        var tempId = 'temporary-' +  Math.round(Math.random() * 100000);
+        parent.id = tempId;
+        var currentId = parent.querySelectorAll('#' + tempId + ' > fieldset').length;
+        parent.removeAttribute('id');
         template.insertAdjacentHTML('beforebegin', template.dataset.template.replace(/__placeholder__/g, currentId));
     ";
 
