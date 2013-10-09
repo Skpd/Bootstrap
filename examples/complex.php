@@ -81,21 +81,21 @@ $form->add([
             'spec' => [
                 'name' => 'datetime',
                 'type' => 'text',
-                'options' => ['label' => 'Foo', 'size' => 4],
+                'options' => ['label' => 'Foo', 'size' => 4, 'help' => 'Lorem ipsum dolor sit amet'],
             ]
         ],
         [
             'spec' => [
                 'name' => 'more',
                 'type' => 'file',
-                'options' => ['label' => 'Bar', 'size' => 6],
+                'options' => ['label' => 'Bar', 'size' => 4, 'help' => ['placement' => 'right', 'collapse' => true, 'text' => 'consectetur adipiscing elit']],
             ]
         ],
         [
             'spec' => [
                 'name' => 'fields',
                 'type' => 'color',
-                'options' => ['label' => 'Baz', 'size' => 2],
+                'options' => ['label' => 'Baz', 'size' => 4, 'help' => 'Nam nulla odio, tincidunt vitae cursus sit amet, gravida eu lectus. Donec nec quam risus. Morbi vel posuere est. Phasellus scelerisque tortor erat, quis faucibus nisi malesuada at. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam convallis mauris sit amet congue mollis. Maecenas in sagittis erat, quis consectetur mi.'],
             ]
         ],
     ]
@@ -126,6 +126,12 @@ $form->add([
             <?= $view->form()->setType('horizontal')->render($form->setAttribute('class', 'col-lg-offset-2 col-lg-8')) ?>
         </div>
     </div>
+
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="js/tooltip.js"></script>
+    <script>
+        $('*[data-toggle="tooltip"]').tooltip();
+    </script>
 </div>
 </body>
 </html>

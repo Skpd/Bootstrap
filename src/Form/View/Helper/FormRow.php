@@ -12,6 +12,8 @@ use Zend\Form\ElementInterface;
 
 class FormRow extends \Zend\Form\View\Helper\FormRow
 {
+    protected $renderHelp = true;
+
     /**
      * The class that is added to element that have errors
      *
@@ -134,6 +136,30 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
             return $markup . ' ';
         }
 
+        $help = $element->getOption('help');
+
+        if ($this->renderHelp && !empty($help)) {
+            if (!is_array($help)) {
+                $help = array('text' => $help);
+            }
+
+            if (!empty($help['collapse'])) {
+                if (empty($help['placement'])) {
+                    $help['placement'] = 'right';
+                }
+
+                $markup .= sprintf(
+                    '<span class="help-block">
+                        <i data-placement="%s" data-toggle="tooltip" data-title="%s" class="glyphicon glyphicon-question-sign"></i>
+                    </span>',
+                    $help['placement'],
+                    $help['text']
+                );
+            } else {
+                $markup .= '<span class="help-block">' . $help['text'] . '</span>';
+            }
+        }
+
         return sprintf(
             '<div class="%s">%s</div> ',
             $rowClass,
@@ -141,6 +167,10 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
         );
     }
 
+    /**
+     * @param ElementInterface $element
+     * @return array
+     */
     protected function getLabelAttributesByElement($element)
     {
         $labelAttributes = $element->getLabelAttributes();
@@ -176,5 +206,21 @@ class FormRow extends \Zend\Form\View\Helper\FormRow
         }
 
         return $labelAttributes;
+    }
+
+    /**
+     * @param mixed $renderHelp
+     */
+    public function setRenderHelp($renderHelp)
+    {
+        $this->renderHelp = $renderHelp;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function renderHelp()
+    {
+        return $this->renderHelp;
     }
 }
