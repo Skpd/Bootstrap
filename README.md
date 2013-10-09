@@ -54,5 +54,5 @@ Installation
 
 - [x] Default elements
 - [x] Form Types (inline, horizontal, default) 
-- [ ] Help blocks
+- [x] Help blocks
 - [ ] Alerts with the *Flash Messenger* plugin
